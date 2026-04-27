@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Tomasz Werner — Selected Film Works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #efeeec;
+      color: rgba(0, 0, 0, 0.85);
+      font-family: 'Karla', sans-serif;
+      font-size: 100%;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      padding-left: 5%;
+      padding-right: 5%;
+      animation: fadein 1.5s ease;
+    }
+
+    /* ── Header ── */
+
+    .site-header {
+      padding-top: 5%;
+      padding-bottom: 3%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .site-title h1 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .site-title a:hover {
+      border-bottom: 1px solid rgba(0,0,0,0.85);
+    }
+
+    .site-subtitle {
+      margin: 0;
+      margin-top: 0.45em;
+      font-size: 13px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(0, 0, 0, 0.45);
+      max-width: 320px;
+      line-height: 1.7;
+    }
+
+    .site-context {
+      text-align: right;
+    }
+
+    .site-context p {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1.7;
+    }
+
+    /* ── Video List ── */
+
+    .video-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .video-list li {
+      padding-bottom: 100px;
+    }
+
+    /* Thumbnail + play button (pre-click state) */
+
+    .video-embed {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #e8e8e8;
+      cursor: pointer;
+    }
+
+    .video-thumbnail {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-thumbnail:hover .arrow svg polygon {
+      fill: rgba(255, 255, 255, 0.85);
+    }
+
+    .play-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .arrow {
+      display: block;
+    }
+
+    /* Iframe (post-click state) */
+
+    .video-embed iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ── Video Metadata ── */
+
+    /* Old Jekyll layout: title+client float left, role wraps right */
+
+    .video-meta {
+      padding-top: 1em;
+      overflow: hidden;
+      clear: both;
+    }
+
+    .video-title-wrap {
+      float: left;
+      padding-right: 2em;
+    }
+
+    .video-title {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      line-height: 1.4;
+    }
+
+    .video-client {
+      margin: 0;
+      margin-top: 0.45em;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.45);
+    }
+
+    .video-role {
+      margin: 0;
+      padding-top: 0.3em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+
+    /* ── Footer ── */
+
+    .site-footer {
+      text-align: center;
+      padding: 4rem 0 6rem;
+      clear: both;
+    }
+
+    .site-footer p {
+      margin: 0 0 0.6em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.3);
+    }
+
+    .site-footer a {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.75);
+      transition: color 0.2s ease;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      padding-bottom: 2px;
+    }
+
+    .site-footer a:hover {
+      color: rgba(0, 0, 0, 0.85);
+      border-bottom-color: rgba(0, 0, 0, 0.85);
+    }
+
+    /* ── Fade in ── */
+
+    @keyframes fadein {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── Responsive ── */
+
+    @media screen and (max-width: 640px) {
+      .video-list li {
+        padding-bottom: 60px;
+      }
+      .site-header {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .site-context {
+        text-align: left;
+      }
+      .site-subtitle {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="site-header">
+      <div class="site-title">
+        <h1><a href="https://tomaszwerner.com">Tomasz Werner</a></h1>
+        <p class="site-subtitle">Filmmaker, Technical Storytelling<br>&amp; Content Infrastructure</p>
+      </div>
+      <div class="site-context">
+        <p>Selected film works</p>
+        <p>CAIS application</p>
+      </div>
+    </header>
+
+    <ul class="video-list">
+
+      <li>
+        <div class="video-embed">
+          <div class="video-thumbnail"
+               data-embed="https://www.youtube.com/embed/_Ve_KZCo0Nk?autoplay=1"
+               style="background-image: url('https://twernie.github.io/tomasz-werner-portfolio-ff/_uploads/6Artists_THUMB.jpg')">
+            <div class="play-arrow">
+              <div class="arrow">
+                <svg width="54px" height="69px" viewBox="679 1575 68 87" xmlns="http://www.w3.org/2000/svg">
+                  <polygon stroke="none" fill="#FFFFFF" fill-rule="evenodd"
+                    transform="translate(713,1618.5) rotate(-270) translate(-713,-1618.5)"
+                    points="713 1584.5 756.5 1652.5 669.5 1652.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title-wrap">
+            <h3 class="video-title">Artists Meet Machine Learning</h3>
+            <p class="video-client">Google Arts &amp; Culture</p>
+          </div>
+          <p class="video-role">Producer</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="video-embed">
+          <div class="video-thumbnail"
+               data-embed="https://www.youtube.com/embed/BS4nEYhKwvw?autoplay=1"
+               style="background-image: url('https://twernie.github.io/tomasz-werner-portfolio-ff/_uploads/IMG_3817.jpg')">
+            <div class="play-arrow">
+              <div class="arrow">
+                <svg width="54px" height="69px" viewBox="679 1575 68 87" xmlns="http://www.w3.org/2000/svg">
+                  <polygon stroke="none" fill="#FFFFFF" fill-rule="evenodd"
+                    transform="translate(713,1618.5) rotate(-270) translate(-713,-1618.5)"
+                    points="713 1584.5 756.5 1652.5 669.5 1652.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title-wrap">
+            <h3 class="video-title">Vice News Tonight on HBO</h3>
+            <p class="video-client">VICE News</p>
+          </div>
+          <p class="video-role">Producer / DP</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="video-embed">
+          <div class="video-thumbnail"
+               data-embed="https://player.vimeo.com/video/191528855?autoplay=1"
+               style="background-image: url('https://twernie.github.io/tomasz-werner-portfolio-ff/_uploads/design-museum-excerpt-still5-clean.jpg')">
+            <div class="play-arrow">
+              <div class="arrow">
+                <svg width="54px" height="69px" viewBox="679 1575 68 87" xmlns="http://www.w3.org/2000/svg">
+                  <polygon stroke="none" fill="#FFFFFF" fill-rule="evenodd"
+                    transform="translate(713,1618.5) rotate(-270) translate(-713,-1618.5)"
+                    points="713 1584.5 756.5 1652.5 669.5 1652.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title-wrap">
+            <h3 class="video-title">Kickstarter &#8212; Designer Maker User</h3>
+            <p class="video-client">The Design Museum</p>
+          </div>
+          <p class="video-role">Producer / Director</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="video-embed">
+          <div class="video-thumbnail"
+               data-embed="https://player.vimeo.com/video/259744772?autoplay=1"
+               style="background-image: url('https://twernie.github.io/tomasz-werner-portfolio-ff/_uploads/simone-thumb.jpg')">
+            <div class="play-arrow">
+              <div class="arrow">
+                <svg width="54px" height="69px" viewBox="679 1575 68 87" xmlns="http://www.w3.org/2000/svg">
+                  <polygon stroke="none" fill="#FFFFFF" fill-rule="evenodd"
+                    transform="translate(713,1618.5) rotate(-270) translate(-713,-1618.5)"
+                    points="713 1584.5 756.5 1652.5 669.5 1652.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title-wrap">
+            <h3 class="video-title">Simone&#8217;s Story &#8212; Coming to America</h3>
+            <p class="video-client">Guardian US</p>
+          </div>
+          <p class="video-role">Producer / DP</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="video-embed">
+          <div class="video-thumbnail"
+               data-embed="https://www.youtube.com/embed/Vfw9zsHLU2s?autoplay=1"
+               style="background-image: url('https://twernie.github.io/tomasz-werner-portfolio-ff/_uploads/savile-row2.jpg')">
+            <div class="play-arrow">
+              <div class="arrow">
+                <svg width="54px" height="69px" viewBox="679 1575 68 87" xmlns="http://www.w3.org/2000/svg">
+                  <polygon stroke="none" fill="#FFFFFF" fill-rule="evenodd"
+                    transform="translate(713,1618.5) rotate(-270) translate(-713,-1618.5)"
+                    points="713 1584.5 756.5 1652.5 669.5 1652.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title-wrap">
+            <h3 class="video-title">How to Make a Savile Row Suit &#8212; with Anderson &amp; Sheppard</h3>
+            <p class="video-client">MoMA</p>
+          </div>
+          <p class="video-role">Editor</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="video-embed">
+          <div class="video-thumbnail"
+               data-embed="https://player.vimeo.com/video/226009320?autoplay=1"
+               style="background-image: url('https://twernie.github.io/tomasz-werner-portfolio-ff/_uploads/Thumbnail1.jpg')">
+            <div class="play-arrow">
+              <div class="arrow">
+                <svg width="54px" height="69px" viewBox="679 1575 68 87" xmlns="http://www.w3.org/2000/svg">
+                  <polygon stroke="none" fill="#FFFFFF" fill-rule="evenodd"
+                    transform="translate(713,1618.5) rotate(-270) translate(-713,-1618.5)"
+                    points="713 1584.5 756.5 1652.5 669.5 1652.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title-wrap">
+            <h3 class="video-title">David Carey &#8212; Digital Transitions in Storytelling</h3>
+            <p class="video-client">Future of Storytelling</p>
+          </div>
+          <p class="video-role">Director</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="video-embed">
+          <div class="video-thumbnail"
+               data-embed="https://www.youtube.com/embed/YdR0GOLF918?autoplay=1"
+               style="background-image: url('https://twernie.github.io/tomasz-werner-portfolio-ff/_uploads/hwt-thumb1.jpg')">
+            <div class="play-arrow">
+              <div class="arrow">
+                <svg width="54px" height="69px" viewBox="679 1575 68 87" xmlns="http://www.w3.org/2000/svg">
+                  <polygon stroke="none" fill="#FFFFFF" fill-rule="evenodd"
+                    transform="translate(713,1618.5) rotate(-270) translate(-713,-1618.5)"
+                    points="713 1584.5 756.5 1652.5 669.5 1652.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title-wrap">
+            <h3 class="video-title">Hank Willis Thomas | Unbranded</h3>
+            <p class="video-client">MoMA</p>
+          </div>
+          <p class="video-role">Director of Photography</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="video-embed">
+          <div class="video-thumbnail"
+               data-embed="https://www.youtube.com/embed/kj_OBQLmIzQ?autoplay=1"
+               style="background-image: url('https://twernie.github.io/tomasz-werner-portfolio-ff/_uploads/karra-thumb2.jpg')">
+            <div class="play-arrow">
+              <div class="arrow">
+                <svg width="54px" height="69px" viewBox="679 1575 68 87" xmlns="http://www.w3.org/2000/svg">
+                  <polygon stroke="none" fill="#FFFFFF" fill-rule="evenodd"
+                    transform="translate(713,1618.5) rotate(-270) translate(-713,-1618.5)"
+                    points="713 1584.5 756.5 1652.5 669.5 1652.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title-wrap">
+            <h3 class="video-title">Karra Raises Her Voice</h3>
+            <p class="video-client">Splice</p>
+          </div>
+          <p class="video-role">Producer</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="video-embed">
+          <div class="video-thumbnail"
+               data-embed="https://www.youtube.com/embed/w1Uz2qTzeeg?autoplay=1&cc_load_policy=1"
+               style="background-image: url('https://twernie.github.io/tomasz-werner-portfolio-ff/_uploads/yapstill-retouched.jpg')">
+            <div class="play-arrow">
+              <div class="arrow">
+                <svg width="54px" height="69px" viewBox="679 1575 68 87" xmlns="http://www.w3.org/2000/svg">
+                  <polygon stroke="none" fill="#FFFFFF" fill-rule="evenodd"
+                    transform="translate(713,1618.5) rotate(-270) translate(-713,-1618.5)"
+                    points="713 1584.5 756.5 1652.5 669.5 1652.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title-wrap">
+            <h3 class="video-title">Weaving the Courtyard</h3>
+            <p class="video-client">MoMA</p>
+          </div>
+          <p class="video-role">Director / DP / Editor</p>
+        </div>
+      </li>
+
+    </ul>
+
+    <footer class="site-footer">
+      <p>Full portfolio</p>
+      <a href="https://tomaszwerner.com">tomaszwerner.com</a>
+    </footer>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.video-thumbnail').forEach(function(thumb) {
+      thumb.addEventListener('click', function() {
+        var embedUrl = this.dataset.embed;
+        var container = this.parentElement;
+        var iframe = document.createElement('iframe');
+        iframe.src = embedUrl;
+        iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;';
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', '');
+        this.style.display = 'none';
+        container.appendChild(iframe);
+      });
+    });
+  </script>
+
+</body>
+</html>
